@@ -39,8 +39,8 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        val url = "https://66fa2eb944839cc2e49cb282--bucolic-shortbread-4360a8.netlify.app/"
-
+       // val url = "https://main--gilded-swan-1f3c3c.netlify.app/"
+        val url = "https://www.figma.com/proto/qDG4SVPlRwTIFFLUKJJ4Qm/LMS-Prototyping?content-scaling=fixed&embed-host=share&kind=proto&node-id=1-663&page-id=0%3A1&scaling=scale-down&starting-point-node-id=1%3A663&theme=light&version=2"
 
         binding.webView.settings.apply {
             javaScriptEnabled = true
