@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
@@ -14,9 +15,9 @@ import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.web.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -32,7 +33,9 @@ class MainActivity : AppCompatActivity() {
 //            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
 //            insets
 //        }
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
+        hideSystemUI()
         binding.webView.setPadding(0,getStatusBarHeight(),0,0)
 
 
@@ -104,6 +107,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        hideSystemUI()
+    }
+
 
     @SuppressLint("InternalInsetResource")
     fun getStatusBarHeight(): Int {
@@ -113,6 +121,26 @@ class MainActivity : AppCompatActivity() {
             result = resources.getDimensionPixelSize(resourceId)
         }
         return result
+    }
+
+
+    private fun hideSystemUI() {
+        val decorView = window.decorView
+        decorView.systemUiVisibility =
+            (View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY // Use sticky immersive mode
+                    or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                   // or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN  //commen
+                    or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
+                   // or View.SYSTEM_UI_FLAG_FULLSCREEN)
+    }
+
+    // Call this to show the system bars
+    private fun showSystemUI() {
+        val decorView = window.decorView
+        decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
     }
 
 }
